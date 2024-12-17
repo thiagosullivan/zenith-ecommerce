@@ -11,14 +11,14 @@ export default function RegisterPage() {
   const router = useRouter();
 
   return (
-    <main className="h-[100vh] flex justify-center flex-1">
+    <main className="h-full flex justify-center flex-1 overflow-y-hidden relative">
       <button
         className="absolute border border-primary p-2 rounded-md right-4 top-4"
         onClick={router.back}
       >
         <ArrowLeft className="h-4 w-4" />
       </button>
-      <div className="h-full w-full relative">
+      <div className="h-[100vh] w-full relative">
         <Image
           src={ZenithLogo}
           alt="Zenith Logo"
@@ -33,15 +33,20 @@ export default function RegisterPage() {
           className="object-cover w-full h-full"
         />
       </div>
-      <div className="w-full flex flex-col justify-center items-start pl-28 pr-10 max-xl:pl-20 max-lg:pl-10">
+      <div className="w-full max-h-[100vh] flex flex-col justify-center items-start pl-28 pr-10 max-xl:pl-20 max-lg:pl-8 max-lg:pr-8">
         <div className="max-w-[445px] w-full">
-          <h1 className="text-primary font-bold text-3xl font-poppins mb-1">
+          <h1 className="text-primary font-bold text-3xl font-poppins mb-1 mt-4">
             Criar Uma Nova Conta
           </h1>
           <p className="text-gray-400 font-jost text-base mb-7">
             Por favor insira suas informações nos campos abaixos
           </p>
-          <RegisterForm />
+          <div
+            className="max-h-[75vh] overflow-y-auto pb-8"
+            id="registerFormDiv"
+          >
+            <RegisterForm />
+          </div>
         </div>
       </div>
     </main>

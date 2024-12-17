@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -14,23 +16,38 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useHookFormMask } from "use-mask-input";
 
-const formSchema = z.object({
-  firstName: z.string().min(2, { message: "O nome é obrigatório." }),
-  lastName: z.string().min(2, { message: "O sobrenome é obrigatório." }),
-  cpf: z.string().min(11, { message: "O CPF é obrigatório." }).max(11),
-  email: z.string().email({ message: "O E-mail é obrigatório." }),
-  phone: z.string().min(10, { message: "O Telefone é obrigatório." }).max(11),
-  password: z
-    .string({ message: "A senha é obrigatória." })
-    .min(6, { message: "A senha precisa ter ao menos 6 letras." }),
-  terms: z
-    .boolean()
-    .refine(
-      (value) => value === true,
-      "Você precisa aceitar os termos para continuar."
-    ),
-});
+const formSchema = z
+  .object({
+    firstName: z.string().min(2, { message: "O nome é obrigatório." }),
+    lastName: z.string().min(2, { message: "O sobrenome é obrigatório." }),
+    cpf: z.string().min(14, { message: "O CPF é obrigatório." }).max(14),
+    birth: z
+      .string()
+      .min(10, { message: "A data de nascimento é obrigatória." })
+      .max(10),
+    email: z.string().email({ message: "O E-mail é obrigatório." }),
+    phone: z.string().min(10, { message: "O Telefone é obrigatório." }).max(14),
+    password: z
+      .string({ message: "A senha é obrigatória." })
+      .min(6, { message: "A senha precisa ter ao menos 6 letras." }),
+    confirmPassword: z
+      .string({ message: "A confirmação de senha é obrigatória." })
+      .min(6, {
+        message: "A confirmação de senha precisa ter ao menos 6 letras.",
+      }),
+    terms: z
+      .boolean()
+      .refine(
+        (value) => value === true,
+        "Você precisa aceitar os termos para continuar."
+      ),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "As senhas não combinam",
+  });
 
 export function RegisterForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -39,13 +56,21 @@ export function RegisterForm() {
       firstName: "",
       lastName: "",
       cpf: "",
+      birth: "",
       email: "",
+      phone: "",
       password: "",
+      confirmPassword: "",
       terms: false,
     },
   });
 
+  console.log(form.formState.errors);
+
+  const registerWithMask = useHookFormMask(form.register);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log("ENTROU");
     console.log(values);
   }
 
@@ -53,7 +78,7 @@ export function RegisterForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-y-2 font-jost w-full"
+        className="flex flex-col gap-y-1 font-jost w-full px-2"
       >
         <FormField
           control={form.control}
@@ -63,7 +88,7 @@ export function RegisterForm() {
               <FormLabel className="text-primary font-normal">Nome</FormLabel>
               <FormControl>
                 <Input
-                  className="h-12 text-base !mt-0"
+                  className="h-10 text-base !mt-0"
                   placeholder="João"
                   {...field}
                 />
@@ -82,7 +107,7 @@ export function RegisterForm() {
               </FormLabel>
               <FormControl>
                 <Input
-                  className="h-12 text-base !mt-0"
+                  className="h-10 text-base !mt-0"
                   placeholder="Silva"
                   {...field}
                 />
@@ -99,9 +124,32 @@ export function RegisterForm() {
               <FormLabel className="text-primary font-normal">CPF</FormLabel>
               <FormControl>
                 <Input
-                  className="h-12 text-base !mt-0"
+                  className="h-10 text-base !mt-0"
                   placeholder="111.111.111-11"
-                  {...field}
+                  {...registerWithMask("cpf", "999.999.999-99", {
+                    required: true,
+                  })}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="birth"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-primary font-normal">
+                Data de Nascimento
+              </FormLabel>
+              <FormControl>
+                <Input
+                  className="h-10 text-base !mt-0"
+                  placeholder="01/01/1900"
+                  {...registerWithMask("birth", "99/99/9999", {
+                    required: true,
+                  })}
                 />
               </FormControl>
               <FormMessage />
@@ -118,7 +166,7 @@ export function RegisterForm() {
               </FormLabel>
               <FormControl>
                 <Input
-                  className="h-12 text-base !mt-0"
+                  className="h-10 text-base !mt-0"
                   placeholder="exemplo@email.com"
                   {...field}
                 />
@@ -137,9 +185,15 @@ export function RegisterForm() {
               </FormLabel>
               <FormControl>
                 <Input
-                  className="h-12 text-base !mt-0"
-                  placeholder="(43) 99999-9999"
-                  {...field}
+                  className="h-10 text-base !mt-0"
+                  placeholder="(99)99999-9999"
+                  {...registerWithMask(
+                    "phone",
+                    ["(99)9999-9999", "(99)99999-9999"],
+                    {
+                      required: true,
+                    }
+                  )}
                 />
               </FormControl>
               <FormMessage />
@@ -155,7 +209,7 @@ export function RegisterForm() {
               <FormControl>
                 <Input
                   type="password"
-                  className="h-12 text-base !mt-0"
+                  className="h-10 text-base !mt-0"
                   placeholder="Digite sua senha"
                   {...field}
                 />
@@ -166,16 +220,16 @@ export function RegisterForm() {
         />
         <FormField
           control={form.control}
-          name="password"
+          name="confirmPassword"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-primary font-normal">
-                Confirmar Senha
+                Confirme sua senha
               </FormLabel>
               <FormControl>
                 <Input
                   type="password"
-                  className="h-12 text-base !mt-0"
+                  className="h-10 text-base !mt-0"
                   placeholder="Confirme sua senha"
                   {...field}
                 />
@@ -189,28 +243,26 @@ export function RegisterForm() {
             control={form.control}
             name="terms"
             render={({ field }) => (
-              <div className="flex items-center gap-x-2">
-                <FormItem>
-                  <div className="flex">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
+              <div className="space-y-2">
+                <FormItem className="flex gap-x-2">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="!mt-0 leading-none">
+                    <FormLabel className="font-normal">
+                      Eu concordo com os <strong>Termos & Condições</strong>
+                    </FormLabel>
                   </div>
                 </FormItem>
-                <div className="!mt-0 leading-none">
-                  <FormLabel className="font-normal">
-                    Eu concordo com os <strong>Termos & Condições</strong>
-                  </FormLabel>
-                  <FormMessage />
-                </div>
+                <FormMessage />
               </div>
             )}
           />
         </div>
-        <Button className="h-12" type="submit">
+        <Button className="h-10" type="submit">
           Registrar
         </Button>
       </form>
