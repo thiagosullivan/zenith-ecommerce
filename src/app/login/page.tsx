@@ -12,7 +12,7 @@ export default function LoginPage() {
   const router = useRouter();
 
   return (
-    <main className="h-[100vh] flex justify-center flex-1 relative">
+    <main className="h-[100vh] flex justify-center flex-1 overflow-y-hidden relative">
       <button
         className="absolute border border-primary p-2 rounded-md right-4 top-4"
         onClick={router.back}
