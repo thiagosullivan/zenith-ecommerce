@@ -71,3 +71,19 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* scrollbar */
+#registerFormDiv::-webkit-scrollbar {
+  width: 8px;
+}
+#registerFormDiv::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+#registerFormDiv::-webkit-scrollbar-thumb {
+  background: #313131;
+  border-radius: 10px;
+}
+#registerFormDiv::-webkit-scrollbar-thumb:hover {
+  background: #121212;
+}
