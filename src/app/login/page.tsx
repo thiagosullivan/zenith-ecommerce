@@ -20,13 +20,15 @@ export default function LoginPage() {
         <ArrowLeft className="h-4 w-4" />
       </button>
       <div className="h-full w-full relative">
-        <Image
-          src={ZenithLogo}
-          alt="Zenith Logo"
-          width={160}
-          height={78}
-          className="absolute top-10 left-28 z-10 max-xl:left-16 max-lg:left-5 max-lg:top-3"
-        />
+        <Link href="/">
+          <Image
+            src={ZenithLogo}
+            alt="Zenith Logo"
+            width={160}
+            height={78}
+            className="absolute top-10 left-28 z-10 max-xl:left-16 max-lg:left-5 max-lg:top-3"
+          />
+        </Link>
         <Image
           src={LoginImg}
           alt="Imagem Página de Login"

@@ -6,6 +6,7 @@ import ZenithLogo from "../../../public/zenith-logo-one.png";
 import { RegisterForm } from "../components/register/RegisterForm";
 import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -19,13 +20,15 @@ export default function RegisterPage() {
         <ArrowLeft className="h-4 w-4" />
       </button>
       <div className="h-[100vh] w-full relative">
-        <Image
-          src={ZenithLogo}
-          alt="Zenith Logo"
-          width={160}
-          height={78}
-          className="absolute top-10 left-28 z-10 max-xl:left-16 max-lg:left-5 max-lg:top-3"
-        />
+        <Link href="/">
+          <Image
+            src={ZenithLogo}
+            alt="Zenith Logo"
+            width={160}
+            height={78}
+            className="absolute top-10 left-28 z-10 max-xl:left-16 max-lg:left-5 max-lg:top-3"
+          />
+        </Link>
         <Image
           src={RegisterImg}
           alt="Imagem Página de Login"
