@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -11,8 +10,42 @@ import React from "react";
 import TenisNike from "../../../../public/tenis-nike.jpg";
 import Image from "next/image";
 import Badge from "@/app/components/badge";
-import { Button } from "@/components/ui/button";
-import { Ellipsis } from "lucide-react";
+import DropdownProduct from "@/app/components/dropdownProduct";
+
+const products = [
+  {
+    id: "1",
+    image: TenisNike,
+    name: "Ultraboost 1.0 ATR",
+    status: "Publicado",
+    price: 240.0,
+    date: "2022-09-07T15:20:44.946Z",
+  },
+  {
+    id: "2",
+    image: TenisNike,
+    name: "Nike Revolution 7",
+    status: "Sem Estoque",
+    price: 200.0,
+    date: "2022-09-07T15:20:44.946Z",
+  },
+  {
+    id: "3",
+    image: TenisNike,
+    name: "Nike Revolution 7",
+    status: "Publicado",
+    price: 200.89,
+    date: "2022-09-07T15:20:44.946Z",
+  },
+  {
+    id: "4",
+    image: TenisNike,
+    name: "Air Max INTRLK Lite Dx3705",
+    status: "Não Publicado",
+    price: 1010.9,
+    date: "2022-09-07T15:20:44.946Z",
+  },
+];
 
 const ProductPages = () => {
   return (
@@ -37,90 +70,34 @@ const ProductPages = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell>
-              <Image
-                src={TenisNike}
-                alt="Imagem do produto"
-                width={100}
-                height={100}
-              />
-            </TableCell>
-            <TableCell>Ultraboost 1.0 ATR</TableCell>
-            <TableCell>
-              <Badge />
-            </TableCell>
-            <TableCell>R$240</TableCell>
-            <TableCell>01/01/2025</TableCell>
-            <TableCell className="text-right">
-              <Button size="icon" className="bg-gray-200 hover:bg-primary/30">
-                <Ellipsis className="stroke-primary" />
-              </Button>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <Image
-                src={TenisNike}
-                alt="Imagem do produto"
-                width={100}
-                height={100}
-              />
-            </TableCell>
-            <TableCell>Ultraboost 1.0 ATR</TableCell>
-            <TableCell>
-              <Badge />
-            </TableCell>
-            <TableCell>R$240</TableCell>
-            <TableCell>01/01/2025</TableCell>
-            <TableCell className="text-right">
-              <Button size="icon" className="bg-gray-200 hover:bg-primary/30">
-                <Ellipsis className="stroke-primary" />
-              </Button>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <Image
-                src={TenisNike}
-                alt="Imagem do produto"
-                width={100}
-                height={100}
-              />
-            </TableCell>
-            <TableCell>Ultraboost 1.0 ATR</TableCell>
-            <TableCell>
-              <Badge />
-            </TableCell>
-            <TableCell>R$240</TableCell>
-            <TableCell>01/01/2025</TableCell>
-            <TableCell className="text-right">
-              <Button size="icon" className="bg-gray-200 hover:bg-primary/30">
-                <Ellipsis className="stroke-primary" />
-              </Button>
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              <Image
-                src={TenisNike}
-                alt="Imagem do produto"
-                width={100}
-                height={100}
-              />
-            </TableCell>
-            <TableCell>Ultraboost 1.0 ATR</TableCell>
-            <TableCell>
-              <Badge />
-            </TableCell>
-            <TableCell>R$240</TableCell>
-            <TableCell>01/01/2025</TableCell>
-            <TableCell className="text-right">
-              <Button size="icon" className="bg-gray-200 hover:bg-primary/30">
-                <Ellipsis className="stroke-primary" />
-              </Button>
-            </TableCell>
-          </TableRow>
+          {products.map((product) => (
+            <TableRow key={product.id}>
+              <TableCell>
+                <Image
+                  src={product.image}
+                  alt="Imagem do produto"
+                  width={100}
+                  height={100}
+                />
+              </TableCell>
+              <TableCell className="uppercase">{product.name}</TableCell>
+              <TableCell>
+                <Badge status={product.status} />
+              </TableCell>
+              <TableCell>
+                {product.price.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </TableCell>
+              <TableCell>
+                {new Date(product.date).toLocaleDateString("pt-BR")}
+              </TableCell>
+              <TableCell className="text-right">
+                <DropdownProduct />
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
     </div>
