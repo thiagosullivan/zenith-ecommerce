@@ -36,16 +36,16 @@ export default function RegisterPage() {
           className="object-cover w-full h-full"
         />
       </div>
-      <div className="w-full max-h-[100vh] flex flex-col justify-center items-start pl-28 pr-10 max-xl:pl-20 max-lg:pl-8 max-lg:pr-8">
+      <div className="w-full max-h-[100vh] flex flex-col justify-center items-start pl-28 pr-10 max-xl:pl-20 max-lg:pl-8 max-lg:pr-8 pb-4">
         <div className="max-w-[445px] w-full">
-          <h1 className="text-primary font-bold text-3xl font-poppins mb-1 mt-4">
+          <h1 className="text-primary font-bold text-3xl font-poppins mb-1">
             Criar Uma Nova Conta
           </h1>
           <p className="text-gray-400 font-jost text-base mb-7">
             Por favor insira suas informações nos campos abaixos
           </p>
           <div
-            className="max-h-[75vh] overflow-y-auto pb-8"
+            className="max-h-[85vh] overflow-y-auto pb-1"
             id="registerFormDiv"
           >
             <RegisterForm />
