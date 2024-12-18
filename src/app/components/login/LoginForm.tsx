@@ -12,7 +12,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,6 +27,8 @@ const formSchema = z.object({
 });
 
 export function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,6 +36,10 @@ export function LoginForm() {
       password: "",
     },
   });
+
+  function handleShowPassword() {
+    setShowPassword(!showPassword);
+  }
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
@@ -72,12 +80,25 @@ export function LoginForm() {
             <FormItem>
               <FormLabel className="text-primary font-normal">Senha</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
-                  className="h-12 text-base"
-                  placeholder="Digite sua senha"
-                  {...field}
-                />
+                <div className="relative">
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    className="h-12 text-base"
+                    placeholder="Digite sua senha"
+                    {...field}
+                  />
+                  <button
+                    type="button"
+                    className="absolute top-[13px] right-[10px] p-0"
+                    onClick={handleShowPassword}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="w-6 h-6 text-gray-600" />
+                    ) : (
+                      <Eye className="w-6 h-6 text-gray-600" />
+                    )}
+                  </button>
+                </div>
               </FormControl>
               {/* <FormDescription>
                 This is your public display name.
