@@ -21,7 +21,9 @@ const Navbar = () => {
   console.log(pathname, "PATHNAME");
   return (
     <header className="flex flex-col justify-center items-center py-5 font-jost">
-      <Image src={ZenithLogo} alt="Logo Zenith" className="mb-4" />
+      <Link href="/dashboard">
+        <Image src={ZenithLogo} alt="Logo Zenith" className="mb-4" />
+      </Link>
       <div className="w-full">
         <nav className="flex items-center justify-between border-b border-gray-300 pb-3 px-4">
           <ul className="flex gap-x-7">
