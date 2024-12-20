@@ -128,21 +128,6 @@ const DashboardOrdersCard: React.FC<OrdersCardProps> = ({ orders }) => {
           </div>
         </div>
       ))}
-      {/* {orders.map((order) => (
-        <div key={order.id}>
-          <h1>Pedido ID: {order.id}</h1>
-          <p>
-            Usuário: {order.userOrder.firstName} {order.userOrder.lastName}
-          </p>
-          <ul>
-            {order.products.map((product) => (
-              <li key={product.id}>
-                {product.name} - {product.qty} unidade(s) - R${product.price.toFixed(2)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))} */}
     </div>
   );
 };
