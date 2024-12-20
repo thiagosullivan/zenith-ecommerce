@@ -19,6 +19,7 @@ import { z } from "zod";
 import { useHookFormMask } from "use-mask-input";
 import { formSchema } from "@/lib/zodSchemas";
 import { Eye, EyeOff } from "lucide-react";
+import ButtonComponent from "../buttonComponent";
 
 // const formSchema = z
 //   .object({
@@ -300,9 +301,10 @@ export function RegisterForm() {
             )}
           />
         </div>
-        <Button className="h-10" type="submit">
+        <ButtonComponent style="h-10" type="submit" text="Registrar" />
+        {/* <Button className="h-10" type="submit">
           Registrar
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );

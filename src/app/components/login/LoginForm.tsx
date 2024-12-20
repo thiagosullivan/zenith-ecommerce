@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import ButtonComponent from "../buttonComponent";
 
 const formSchema = z.object({
   email: z.string().email({ message: "O E-mail é obrigatório." }),
@@ -132,9 +133,10 @@ export function LoginForm() {
             Esqueceu sua senha?
           </Link>
         </div>
-        <Button className="h-12" type="submit">
+        <ButtonComponent style="h-12" text="Entrar" type="submit" />
+        {/* <Button className="h-12" type="submit">
           Entrar
-        </Button>
+        </Button> */}
       </form>
     </Form>
   );
