@@ -30,11 +30,11 @@ const UsersCard: React.FC<UsersCardProps> = ({ user }) => {
   return (
     <div className="max-w-[400px] max-sm:max-w-full w-full border rounded-lg p-4 font-jost">
       <div className="flex items-center gap-x-2">
-        <Image
+        {/* <Image
           src={user.profileImage}
           alt={user.firstName}
           className="w-[84px] h-[84px] rounded-full"
-        />
+        /> */}
         <div>
           <h3 className="font-bold text-xl">
             {user.firstName} {user.lastName}

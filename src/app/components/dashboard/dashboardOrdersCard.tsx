@@ -51,14 +51,14 @@ const DashboardOrdersCard: React.FC<OrdersCardProps> = ({ orders }) => {
         >
           <div>
             <div className="flex gap-x-4 pr-4 pb-4 mb-4 border-b">
-              <div className="h-[83px] w-[83px]">
+              {/* <div className="h-[83px] w-[83px]">
                 <Image
                   src={order.userOrder.profileImage}
                   alt="Imagem do usuário"
                   width={83}
                   height={83}
                 />
-              </div>
+              </div> */}
               <div>
                 <p className="font-bold text-lg">
                   {order.userOrder.firstName} {order.userOrder.lastName}
