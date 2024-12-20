@@ -6,6 +6,8 @@ const data = [
     id: "12121212",
     createdAt: "2024-12-17T20:20:44.946Z",
     totalPrice: 300.0,
+    paymentMethod: "pix",
+    shipmentCode: "BR12345678",
     userOrder: {
       id: "1212",
       firstName: "Anny",
@@ -45,6 +47,8 @@ const data = [
     id: "13131313",
     createdAt: "2024-12-12T20:20:44.946Z",
     totalPrice: 440.0,
+    paymentMethod: "credit-card",
+    shipmentCode: "BR87654321",
     userOrder: {
       id: "1313",
       firstName: "Betty",
